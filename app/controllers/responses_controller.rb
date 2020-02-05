@@ -1,10 +1,10 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: [:show, :update, :destroy]
+  before_action :authenticate
 
   # GET /responses
   def index
     responses = Response.all
-
     render json: responses
   end
 
@@ -15,6 +15,7 @@ class ResponsesController < ApplicationController
 
   # POST /responses
   def create
+    user = User.find_by(id: current_user.id)
     response = Response.new(response_params)
 
     if response.save
@@ -24,19 +25,19 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /responses/1
-  def update
-    if response.update(response_params)
-      render json: response
-    else
-      render json: response.errors, status: :unprocessable_entity
-    end
-  end
+  # # PATCH/PUT /responses/1
+  # def update
+  #   if response.update(response_params)
+  #     render json: response
+  #   else
+  #     render json: response.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # DELETE /responses/1
-  def destroy
-    response.destroy
-  end
+  # # DELETE /responses/1
+  # def destroy
+  #   response.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

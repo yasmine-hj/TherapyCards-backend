@@ -1,51 +1,56 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :update, :destroy]
+  before_action :authenticate
 
   # GET /cards
   def index
-    cards = Card.all
-
-    render json: cards
-  end
-
-  # GET /cards/1
-  def show
-    render json: card
-  end
-
-  # POST /cards
-  def create
-    card = Card.new(card_params)
-
-    if card.save
-      render json: card, status: :created, location: card
+    if !!params[:subject_id]
+      cards = Card.where(topic_id: params[:topic_id])
+      render json: cards
     else
-      render json: card.errors, status: :unprocessable_entity
+      cards = Card.all
+      render json: cards
     end
   end
 
-  # PATCH/PUT /cards/1
-  def update
-    if card.update(card_params)
-      render json: card
-    else
-      render json: card.errors, status: :unprocessable_entity
-    end
-  end
+  # # GET /cards/1
+  # def show
+  #   render json: card
+  # end
 
-  # DELETE /cards/1
-  def destroy
-    card.destroy
-  end
+  # # POST /cards
+  # def create
+  #   card = Card.new(card_params)
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card
-      card = Card.find(params[:id])
-    end
+  #   if card.save
+  #     render json: card, status: :created, location: card
+  #   else
+  #     render json: card.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-    # Only allow a trusted parameter "white list" through.
-    def card_params
-      params.require(:card).permit(:question, :topic_id, :topic, :name)
-    end
+  # # PATCH/PUT /cards/1
+  # def update
+  #   if card.update(card_params)
+  #     render json: card
+  #   else
+  #     render json: card.errors, status: :unprocessable_entity
+  #   end
+  # end
+
+  # # DELETE /cards/1
+  # def destroy
+  #   card.destroy
+  # end
+
+  # private
+  #   # Use callbacks to share common setup or constraints between actions.
+  #   def set_card
+  #     card = Card.find(params[:id])
+  #   end
+
+  #   # Only allow a trusted parameter "white list" through.
+  #   def card_params
+  #     params.require(:card).permit(:question, :topic_id, :topic, :name)
+  #   end
 end
