@@ -1,3 +1,3 @@
-class ResponseSerializer < ActiveModel::Serializer
-  attributes :id, :response
-end
+# class ResponseSerializer < ActiveModel::Serializer
+#   attributes :id, :response
+# end

@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: [:show, :update, :destroy]
-  before_action :authenticate
+  # before_action :authenticate
 
   # GET /responses
   def index

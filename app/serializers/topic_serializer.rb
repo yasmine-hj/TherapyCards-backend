@@ -1,3 +1,3 @@
-class TopicSerializer < ActiveModel::Serializer
-  attributes :id, :name, :descripton
-end
+# class TopicSerializer < ActiveModel::Serializer
+#   attributes :id, :name, :descripton
+# end

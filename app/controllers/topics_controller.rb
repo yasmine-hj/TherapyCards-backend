@@ -1,17 +1,17 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :update, :destroy]
-  before_action :authenticate
+  # before_action :authenticate
 
   # GET /topics
   def index
     topics = Topic.all
-    render json: topics
+    render json: topics, include: [:cards]
   end
 
   # GET /topics/1
   def show
-    topics = Topic.find_by(id: params[:id])
-    render json: topic
+    # topics = Topic.find_by(id: params[:id])
+    render json: @topic
   end
 
 #   # POST /topics
@@ -40,10 +40,10 @@ class TopicsController < ApplicationController
 #   end
 
   private
-#     # Use callbacks to share common setup or constraints between actions.
-#     def set_topic
-#       topic = Topic.find(params[:id])
-#     end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_topic
+      @topic = Topic.find(params[:id])
+    end
 
 #     # Only allow a trusted parameter "white list" through.
     def topic_params

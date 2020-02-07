@@ -1,3 +1,3 @@
-module ApplicationHelper
-	include JsonWebToken
-end
+# module ApplicationHelper
+# 	include JsonWebToken
+# end
