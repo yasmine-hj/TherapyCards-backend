@@ -1,43 +1,37 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :update, :destroy]
+  # before_action :set_topic, only: [:show, :update, :destroy]
   # before_action :authenticate
 
   # GET /topics
   def index
-    topics = Topic.all
-    render json: topics, include: [:cards]
+    @topics = Topic.all
+    render json: @topics
   end
 
   # GET /topics/1
   def show
-    # topics = Topic.find_by(id: params[:id])
+    @topic = Topic.find(params[:id])
     render json: @topic
   end
 
 #   # POST /topics
-#   def create
-#     topic = Topic.new(topic_params)
-
-#     if topic.save
-#       render json: topic, status: :created, location: topic
-#     else
-#       render json: topic.errors, status: :unprocessable_entity
-#     end
-#   end
-
+  def create
+    @topic = Topic.create(topic_params)
+    render json: @topic
+  end
 #   # PATCH/PUT /topics/1
-#   def update
-#     if topic.update(topic_params)
-#       render json: topic
-#     else
-#       render json: topic.errors, status: :unprocessable_entity
-#     end
-#   end
+  def update
+    @topic = Topic.find(params[:id])
+    @topic.update(topic_params)
+    render json: @topic
+  end
 
-#   # DELETE /topics/1
-#   def destroy
-#     topic.destroy
-#   end
+  # DELETE /topics/1
+  def destroy
+    @topic = Topic.find(params[:id])
+    @topic.delete
+    render json: {topicID: @topic.id}  
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,52 +1,48 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :update, :destroy]
+  # before_action :set_card, only: [:show, :update, :destroy]
   # before_action :authenticate
 
   # GET /cards
   def index
     if !!params[:subject_id]
-      cards = Card.where(topic_id: params[:topic_id])
-      render json: cards
+      @cards = Card.where(topic_id: params[:topic_id])
+      render json: @cards
     else
-      cards = Card.all
-      render json: cards
+      @cards = Card.all
+      render json: @cards
     end
   end
 
   # GET /cards/1
   def show
-    render json: card
+    @card = Card.find(params[:id])
+    render json: @card
   end
 
   # POST /cards
   def create
-    card = Card.new(card_params)
-
-    if card.save
-      render json: card, status: :created, location: card
-    else
-      render json: card.errors, status: :unprocessable_entity
-    end
+     @card = Card.create(card_params)
+     render json: @card
   end
 
   # PATCH/PUT /cards/1
   def update
-    if card.update(card_params)
-      render json: card
-    else
-      render json: card.errors, status: :unprocessable_entity
-    end
+    @card = Card.find(params[:id])
+    @card.update(card_params)
+    render json: @card
   end
 
   # DELETE /cards/1
   def destroy
-    card.destroy
+    @card = Card.find(params[:id])
+    @card.delete
+    render json: {cardID: @card.id}
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      card = Card.find(params[:id])
+      @card = Card.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -4,49 +4,44 @@ class ResponsesController < ApplicationController
 
   # GET /responses
   def index
-    responses = Response.all
-    render json: responses
+    @responses = Response.all
+    render json: @responses
   end
 
   # GET /responses/1
   def show
-    render json: response
+    @response = Response.find(params[:id])
+    render json: @response
   end
 
   # POST /responses
   def create
-    user = User.find_by(id: current_user.id)
-    response = Response.new(response_params)
-
-    if response.save
-      render json: response, status: :created, location: response
-    else
-      render json: response.errors, status: :unprocessable_entity
-    end
+    @response = Response.create(params[:id])
+    render json: @response
   end
 
-  # # PATCH/PUT /responses/1
-  # def update
-  #   if response.update(response_params)
-  #     render json: response
-  #   else
-  #     render json: response.errors, status: :unprocessable_entity
-  #   end
-  # end
+  # PATCH/PUT /responses/1
+  def update
+    @response = Response.find(params[:id])
+    @response.update(response_params)
+    render json: @response
+  end
 
-  # # DELETE /responses/1
-  # def destroy
-  #   response.destroy
-  # end
+  # DELETE /responses/1
+  def destroy
+    @response = Response.find(params[:id])
+    @response.delete
+    render json: {responseID: @response.id}
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_response
-      response = Response.find(params[:id])
+      @response = Response.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def response_params
-      params.require(:response).permit(:response, :datetime.timestamp, :card_id, :user_id, :topic_id)
+      params.require(:response).permit(:response, :datetime, :card_id, :user_id, :topic_id)
     end
 end
