@@ -1,3 +1,4 @@
-# class CardSerializer < ActiveModel::Serializer
-#   attributes :id, :question, :topic
-# end
+class CardSerializer < ActiveModel::Serializer
+  attributes :id, :question
+  belongs_to :topic
+end

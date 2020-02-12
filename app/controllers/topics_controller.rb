@@ -11,6 +11,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   def show
     @topic = Topic.find(params[:id])
+    # binding.pry
     render json: @topic
   end
 

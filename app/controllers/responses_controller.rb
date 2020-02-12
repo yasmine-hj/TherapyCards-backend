@@ -42,6 +42,6 @@ class ResponsesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def response_params
-      params.require(:response).permit(:response, :datetime, :card_id, :user_id, :topic_id)
+      params.require(:response).permit(:response, :datetime, :card_id, :topic_id)
     end
 end
