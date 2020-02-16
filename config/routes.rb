@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :cards
-  resources :users
   resources :responses
 
   resources :topics do 
@@ -10,10 +9,5 @@ Rails.application.routes.draw do
   resources :users do
     resources :responses
   end
-
-
-  post 'auth/register', to: 'users#register'
-  post 'auth/login', to: 'users#login'
-  post 'auth/register', to: 'users#register'
 
 end

@@ -1,6 +1,4 @@
 class ResponsesController < ApplicationController
-  # before_action :set_response, only: [:show, :update, :create, :destroy]
-  # before_action :authenticate
 
   # GET /responses
   def index
@@ -30,18 +28,12 @@ class ResponsesController < ApplicationController
   # DELETE /responses/1
   def destroy
     @response = Response.find(params[:id])
-    @response.delete
+    @response.destroy
     render json: {responseId: @response.id}
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_response
-    #   @response = Response.find(params[:id])
-    # end
-
-    # Only allow a trusted parameter "white list" through.
     def response_params
-      params.require(:response).permit(:response, :id, :card_id)
+      params.require(:response).permit(:response, :card_id)
     end
 end
