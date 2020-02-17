@@ -1,24 +1,18 @@
-# README
+# TherapyCards Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TherapyCards is a card game where you pick from a collection of topics and you can answer and log therapy questions related to this topic!
 
-Things you may want to cover:
+This is the backend code, you can find the frontend code here: https://github.com/yasmine-hj/TherapyCards-JS-Rails-Project-Frontend
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+* Download both the frontend and backend code.
+* ```Bundle install```
+* Execute migrations on backend ```rails db:migrate```
+* Execute seeds on backend ```rails db:seed```
+* Open index.html on front end
+* Enjoy the game!
 
-* Configuration
+## License
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
